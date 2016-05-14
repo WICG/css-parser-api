@@ -30,10 +30,6 @@ over it to find your result.
         StylePropertyMapReadOnly rule(string);
         Sequence<StylePropertyMapReadOnly> ruleSet(string);
     }
-```
-**I have an expectation that this will work mainly as a struct with no other purpose
-  than to group the various parsing capabilities beneath that**
-
 
 ### Example
 
