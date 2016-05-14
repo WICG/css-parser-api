@@ -30,6 +30,7 @@ over it to find your result.
         StylePropertyMapReadOnly rule(string);
         Sequence<StylePropertyMapReadOnly> ruleSet(string);
     }
+```
 
 ### Example
 
