@@ -10,10 +10,7 @@ Desires for these APIs:
   specification where necessary.
 * Be able to request varying levels of error handling by the parser
 
-#Usecase 1 - Sketch of ideas
-* Have an API that hangs off of window, maybe `window.cssParse.Value()` that
-  allows you to pass in `<string>`, `<parseType>`.
-  
+#Usecase 1 - Sketch of ideas  
 Basically what this will allow you to do is something similiar to the current
 results of inserting new stylesheet via JS to force it to be within the CSSOM
 but get the benefits of it not needing to be an actual stylesheet or iterate
