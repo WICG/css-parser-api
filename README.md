@@ -37,7 +37,7 @@ over it to find your result.
    
    var styles = window.cssParse.ruleSet(".foo { background: green; margin: 5px; }");
    console.log(styles.length) // 5
-   console.log(styles.styleMap.get("margin-top").value) // 5
-   console.log(styles.styleMap.get("margin-top").type) // "px"
+   console.log(styles[0].styleMap.get("margin-top").value) // 5
+   console.log(styles[0].styleMap.get("margin-top").type) // "px"
 ```
 
