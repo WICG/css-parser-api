@@ -33,7 +33,7 @@ over it to find your result.
 
 ```
    var background = window.cssParse.rule("background: green");
-   console.log(background.styleMap.get("background").ruleSet) // "green"
+   console.log(background.styleMap.get("background").value) // "green"
    
    var styles = window.cssParse.ruleSet(".foo { background: green; margin: 5px; }");
    console.log(styles.length) // 5
