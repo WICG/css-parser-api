@@ -42,7 +42,7 @@ Parsing API {#parsing-api}
 ==========================
 
 <pre class=idl>
-typedef (DOMString or ReadableStream or Promise&lt;ReadableStream>) CSSStringSource;
+typedef (DOMString or ReadableStream) CSSStringSource;
 
 partial interface CSS {
 	Promise&lt;sequence&lt;CSSParserRule>> parseStylesheet(CSSStringSource css, optional CSSParserOptions options);
