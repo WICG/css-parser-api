@@ -40,11 +40,13 @@ Parsing API {#parsing-api}
 ==========================
 
 <pre class=idl>
+typedef (DOMString or ReadableStream or Promise&lt;ReadableStream>) CSSStringSource;
+
 partial interface CSS {
-	Promise&lt;sequence&lt;CSSParserRule>> parseStylesheet(DOMString css, optional CSSParserOptions options);
-	Promise&lt;sequence&lt;CSSParserRule>> parseRuleList(DOMString css, optional CSSParserOptions options);
-	Promise&lt;CSSParserRule> parseRule(DOMString css, optional CSSParserOptions options);
-	Promise&lt;sequence&lt;CSSParserRule>> parseDeclarationList(DOMString css, optional CSSParserOptions options);
+	Promise&lt;sequence&lt;CSSParserRule>> parseStylesheet(CSSStringSource css, optional CSSParserOptions options);
+	Promise&lt;sequence&lt;CSSParserRule>> parseRuleList(CSSStringSource css, optional CSSParserOptions options);
+	Promise&lt;CSSParserRule> parseRule(CSSStringSource css, optional CSSParserOptions options);
+	Promise&lt;sequence&lt;CSSParserRule>> parseDeclarationList(CSSStringSource css, optional CSSParserOptions options);
 	CSSParserDeclaration parseDeclaration(DOMString css, optional CSSParserOptions options);
 	CSSParserValue parseValue(DOMString css);
 	sequence&lt;CSSParserValue> parseValueList(DOMString css);
