@@ -10,7 +10,7 @@ Desires for these APIs:
   specification where necessary.
 * Be able to request varying levels of error handling by the parser
 
-### Example: Parsing out a ruleset
+## Example: Parsing out a ruleset
 
 ```
    var background = window.cssParse.rule("background: green");
@@ -22,7 +22,7 @@ Desires for these APIs:
    console.log(styles[0].styleMap.get("margin-top").type) // "px"
 ```
 
-### Example: Parsing out a stylesheet
+## Example: Parsing out a stylesheet
 
 ```
 	const style = fetch("style.css")
@@ -48,7 +48,8 @@ Work Items
 2. Expose all of the Syntax parsing hooks on `window.CSS`. Maybe add a few more as needed, like "parse a media query" or something.
 3. Write up pseudo-code examples for all of the use-cases, illustrating how the proposed API would be used. The use-cases above all have concrete examples that can be used.
 
-## Example of the problem
+Example of the problem
+======================
 
 Here is an example of some JS code that is wanting to parse out various CSS
 types and also seperate out the values from their units.
