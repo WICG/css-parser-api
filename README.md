@@ -4,7 +4,7 @@ There are two over-arching use cases:
 1. Pass the parser a string receive and receive an object
 to work with instead of building custom parsing in JS.
 2. Extend what the parser understands for fully polyfilling
-    
+
 Desires for these APIs:
 * Build on top of the [TypedOM](https://drafts.css-houdini.org/css-typed-om/) and make modifications to that
   specification where necessary.
@@ -15,7 +15,7 @@ Desires for these APIs:
 ```
    var background = window.cssParse.rule("background: green");
    console.log(background.styleMap.get("background").value) // "green"
-   
+
    var styles = window.cssParse.ruleSet(".foo { background: green; margin: 5px; }");
    console.log(styles.length) // 5
    console.log(styles[0].styleMap.get("margin-top").value) // 5
@@ -25,12 +25,9 @@ Desires for these APIs:
 ### Example: Parsing out a stylesheet
 
 ```
-    var style = window.CSS.parseStylesheet(fetch(style.css)
-                                           .then(function (response) {
-                                               return response;
-                                           });
-
-    console.log(style);
+	const style = fetch("style.css")
+		.then(response=>CSS.parseStylesheet(response.body));
+	style.then(console.log);
 
     /* example of the object once we have it more refined */
     );
@@ -51,7 +48,7 @@ Work Items
 2. Expose all of the Syntax parsing hooks on `window.CSS`. Maybe add a few more as needed, like "parse a media query" or something.
 3. Write up pseudo-code examples for all of the use-cases, illustrating how the proposed API would be used. The use-cases above all have concrete examples that can be used.
 
-### Example of the problem
+## Example of the problem
 
 Here is an example of some JS code that is wanting to parse out various CSS
 types and also seperate out the values from their units.
@@ -82,7 +79,7 @@ types and also seperate out the values from their units.
 			);
 
 			// Remove any digits eg: 55px -> px, 1.5 -> 0.0, 1 -> 0
-			value = value.replace(/(?:[+]|[-]|)(?:(?:[0-9]+)(?:[.][0-9]+|)|(?:[.][0-9]+))(?:[e](?:[+]|[-]|)(?:[0-9]+))?(%|e[a-z]+|[a-df-z][a-z]*)/g, "$1"); 
+			value = value.replace(/(?:[+]|[-]|)(?:(?:[0-9]+)(?:[.][0-9]+|)|(?:[.][0-9]+))(?:[e](?:[+]|[-]|)(?:[0-9]+))?(%|e[a-z]+|[a-df-z][a-z]*)/g, "$1");
 			value = value.replace(/(?:[+]|[-]|)(?:[0-9]+)(?:[.][0-9]+)(?:[e](?:[+]|[-]|)(?:[0-9]+))?/g, " <float> ");
 			value = value.replace(/(?:[+]|[-]|)(?:[.][0-9]+)(?:[e](?:[+]|[-]|)(?:[0-9]+))?/g, " <float> ");
 			value = value.replace(/(?:[+]|[-]|)(?:[0-9]+)(?:[e](?:[+]|[-]|)(?:[0-9]+))/g, " <float> ");
