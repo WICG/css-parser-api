@@ -6,8 +6,10 @@ Status: UD
 Group: HOUDINI
 URL: https://drafts.css-houdini.org/css-parser-api/
 Editor: Tab Atkins-Bittner
+Editor: Greg Whitworth
 Abstract: An API exposing the CSS parser more directly,
 Abstract: for parsing arbitrary CSS-like languages into a mildly typed representation.
+Repository: WICG/CSS-Parser-API
 </pre>
 
 Introduction {#intro}
@@ -197,7 +199,7 @@ interface CSSParserChar : CSSParserValue {
 };
 </pre>
 
-Issue: Some of the CSSParserValue subtypes correspond closely to Typed OM types;
+Issue(9): Some of the CSSParserValue subtypes correspond closely to Typed OM types;
 in particular, {{CSSParserIdent}} and {{CSSKeywordValue}} are basically the same thing,
 as are {{CSSParserNumber}} and {{CSSNumberValue}}.
 Is it worthwhile to transplant this hierarchy underneath the {{CSSStyleValue}} superclass,

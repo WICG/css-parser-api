@@ -262,10 +262,11 @@ pre.idl.highlight { color: #708090; }
      <dt>Feedback:
      <dd><span><a href="mailto:public-houdini@w3.org?subject=%5Bcss-parser-api%5D%20YOUR%20TOPIC%20HERE">public-houdini@w3.org</a> with subject line “<kbd>[css-parser-api] <i data-lt="">… message topic …</i></kbd>” (<a href="http://lists.w3.org/Archives/Public/public-houdini/" rel="discussion">archives</a>)</span>
      <dt>Issue Tracking:
-     <dd><a href="https://github.com/w3c/css-houdini-drafts/issues/">GitHub</a>
+     <dd><a href="https://github.com/WICG/CSS-Parser-API/issues/">GitHub</a>
      <dd><a href="#issues-index">Inline In Spec</a>
-     <dt class="editor">Editor:
+     <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard"><span class="p-name fn">Tab Atkins-Bittner</span>
+     <dd class="editor p-author h-card vcard"><span class="p-name fn">Greg Whitworth</span>
     </dl>
    </div>
    <div data-fill-with="warning"></div>
@@ -487,7 +488,7 @@ or is it too annoying to be worth it?</p>
 in particular, <code class="idl"><a data-link-type="idl" href="#cssparserident" id="ref-for-cssparserident-1">CSSParserIdent</a></code> and <code class="idl"><a data-link-type="idl" href="https://drafts.css-houdini.org/css-typed-om-1/#csskeywordvalue">CSSKeywordValue</a></code> are basically the same thing,
 as are <code class="idl"><a data-link-type="idl" href="#cssparsernumber" id="ref-for-cssparsernumber-1">CSSParserNumber</a></code> and <code class="idl"><a data-link-type="idl" href="https://drafts.css-houdini.org/css-typed-om-1/#cssnumbervalue">CSSNumberValue</a></code>.
 Is it worthwhile to transplant this hierarchy underneath the <code class="idl"><a data-link-type="idl" href="https://drafts.css-houdini.org/css-typed-om-1/#cssstylevalue">CSSStyleValue</a></code> superclass,
-and reuse the ones that are reasonable?</p>
+and reuse the ones that are reasonable? <a href="https://github.com/WICG/CSS-Parser-API/issues/9">&lt;https://github.com/WICG/CSS-Parser-API/issues/9></a></p>
    <p class="issue" id="issue-b55dd760"><a class="self-link" href="#issue-b55dd760"></a> Trying to be as useful as possible,
 without exposing so many details that we’re unable to change tokenization in the future.
 In particular, whitespace, delims, and the weird Selectors tokens
@@ -882,7 +883,7 @@ or is it too annoying to be worth it?<a href="#issue-50aa19eb"> ↵ </a></div>
 in particular, <code class="idl"><a data-link-type="idl" href="#cssparserident">CSSParserIdent</a></code> and <code class="idl"><a data-link-type="idl" href="https://drafts.css-houdini.org/css-typed-om-1/#csskeywordvalue">CSSKeywordValue</a></code> are basically the same thing,
 as are <code class="idl"><a data-link-type="idl" href="#cssparsernumber">CSSParserNumber</a></code> and <code class="idl"><a data-link-type="idl" href="https://drafts.css-houdini.org/css-typed-om-1/#cssnumbervalue">CSSNumberValue</a></code>.
 Is it worthwhile to transplant this hierarchy underneath the <code class="idl"><a data-link-type="idl" href="https://drafts.css-houdini.org/css-typed-om-1/#cssstylevalue">CSSStyleValue</a></code> superclass,
-and reuse the ones that are reasonable?<a href="#issue-763e35c7"> ↵ </a></div>
+and reuse the ones that are reasonable? <a href="https://github.com/WICG/CSS-Parser-API/issues/9">&lt;https://github.com/WICG/CSS-Parser-API/issues/9></a><a href="#issue-763e35c7"> ↵ </a></div>
    <div class="issue"> Trying to be as useful as possible,
 without exposing so many details that we’re unable to change tokenization in the future.
 In particular, whitespace, delims, and the weird Selectors tokens
