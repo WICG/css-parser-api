@@ -10,26 +10,83 @@ Desires for these APIs:
   specification where necessary.
 * Be able to request varying levels of error handling by the parser
 
-#Usecase 1 - Sketch of ideas  
-Basically what this will allow you to do is something similiar to the current
-results of inserting new stylesheet via JS to force it to be within the CSSOM
-but get the benefits of it not needing to be an actual stylesheet or iterate
-over it to find your result.
+### Example of the problem
 
-### Strawman IDL
-```
-    partial interface Window {
-        void cssParse
-    }
-    
-    partial interface cssParse {
-        bool onlyCheckForSyntaxError // This will only check against grammar, not engine support
-        StylePropertyMapReadOnly rule(string);
-        Sequence<StylePropertyMapReadOnly> ruleSet(string);
-    }
+Here is an example of some JS code that is wanting to parse out various CSS
+types and also seperate out the values from their units.
+
 ```
 
-### Example
+		function parseValues(value,propertyName) {
+			// Trim value on the edges
+			value = value.trim();
+
+			// Normalize letter-casing
+			value = value.toLowerCase();
+
+			// Map colors to a standard value (eg: white, blue, yellow)
+			if (isKeywordColor(value)) { return "<color-keyword>"; }
+
+			value = value.replace(/[#][0-9a-fA-F]+/g, '#xxyyzz');
+
+			// Escapce identifiers containing numbers
+			var numbers = ['ZERO','ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE'];
+
+			value = value.replace(
+				/([_a-z][-_a-z]|[_a-df-z])[0-9]+[-_a-z0-9]*/g,
+				s=>numbers.reduce(
+					(m,nstr,nint)=>m.replace(RegExp(nint,'g'),nstr),
+					s
+				)
+			);
+
+			// Remove any digits eg: 55px -> px, 1.5 -> 0.0, 1 -> 0
+			value = value.replace(/(?:[+]|[-]|)(?:(?:[0-9]+)(?:[.][0-9]+|)|(?:[.][0-9]+))(?:[e](?:[+]|[-]|)(?:[0-9]+))?(%|e[a-z]+|[a-df-z][a-z]*)/g, "$1"); 
+			value = value.replace(/(?:[+]|[-]|)(?:[0-9]+)(?:[.][0-9]+)(?:[e](?:[+]|[-]|)(?:[0-9]+))?/g, " <float> ");
+			value = value.replace(/(?:[+]|[-]|)(?:[.][0-9]+)(?:[e](?:[+]|[-]|)(?:[0-9]+))?/g, " <float> ");
+			value = value.replace(/(?:[+]|[-]|)(?:[0-9]+)(?:[e](?:[+]|[-]|)(?:[0-9]+))/g, " <float> ");
+			value = value.replace(/(?:[+]|[-]|)(?:[0-9]+)/g, " <int> ");
+
+			// Unescapce identifiers containing numbers
+			value = numbers.reduce(
+				(m,nstr,nint)=>m.replace(RegExp(nstr,'g'),nint),
+				value
+			)
+
+			// Remove quotes
+			value = value.replace(/('|‘|’|")/g, "");
+
+			//
+			switch(propertyName) {
+				case 'counter-increment':
+				case 'counter-reset':
+					// Anonymize the user identifier
+					value = value.replace(/[-_a-zA-Z0-9]+/g,' <custom-ident> ');
+					break;
+				case 'grid':
+				case 'grid-template':
+				case 'grid-template-rows':
+				case 'grid-template-columns':
+				case 'grid-template-areas':
+					// Anonymize line names
+					value = value.replace(/\[[-_a-zA-Z0-9 ]+\]/g,' <line-names> ');
+					break;
+				case '--var':
+					// Replace (...), {...} and [...]
+					value = value.replace(/[(](?:[^()]+|[(](?:[^()]+|[(](?:[^()]+|[(](?:[^()]+|[(](?:[^()]*)[)])*[)])*[)])*[)])*[)]/g, " <parentheses-block> ");
+					value = value.replace(/[(](?:[^()]+|[(](?:[^()]+|[(](?:[^()]+|[(](?:[^()]+|[(](?:[^()]*)[)])*[)])*[)])*[)])*[)]/g, " <parentheses-block> ");
+					value = value.replace(/\[(?:[^()]+|\[(?:[^()]+|\[(?:[^()]+|\[(?:[^()]+|\[(?:[^()]*)\])*\])*\])*\])*\]/g, " <curly-brackets-block> ");
+					value = value.replace(/\[(?:[^()]+|\[(?:[^()]+|\[(?:[^()]+|\[(?:[^()]+|\[(?:[^()]*)\])*\])*\])*\])*\]/g, " <curly-brackets-block> ");
+					value = value.replace(/\{(?:[^()]+|\{(?:[^()]+|\{(?:[^()]+|\{(?:[^()]+|\{(?:[^()]*)\})*\})*\})*\})*\}/g, " <square-brackets-block> ");
+					value = value.replace(/\{(?:[^()]+|\{(?:[^()]+|\{(?:[^()]+|\{(?:[^()]+|\{(?:[^()]*)\})*\})*\})*\})*\}/g, " <square-brackets-block> ");
+					break;
+			}
+
+			return value.trim();
+		}
+```
+
+### Example: Parsing out a ruleset
 
 ```
    var background = window.cssParse.rule("background: green");
@@ -39,6 +96,20 @@ over it to find your result.
    console.log(styles.length) // 5
    console.log(styles[0].styleMap.get("margin-top").value) // 5
    console.log(styles[0].styleMap.get("margin-top").type) // "px"
+```
+
+### Example: Parsing out a stylesheet
+
+```
+    var style = window.CSS.parseStylesheet(fetch(style.css)
+                                           .then(function (response) {
+                                               return response;
+                                           });
+
+    console.log(style);
+
+    /* example of the object once we have it more refined */
+    );
 ```
 
 Use Cases
