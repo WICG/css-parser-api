@@ -3,8 +3,8 @@ Title: CSS Parser API
 Shortname: css-parser-api
 Level: 1
 Status: UD
-Group: HOUDINI
-URL: https://drafts.css-houdini.org/css-parser-api/
+Group: WICG
+URL: https://wicg.github.io/CSS-Parser-API/
 Editor: Tab Atkins-Bittner
 Editor: Greg Whitworth
 Abstract: An API exposing the CSS parser more directly,
