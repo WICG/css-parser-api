@@ -1,7 +1,7 @@
 # Overview
 The goal of this specification is to allow authors access to the engine's parser.
 There are two over-arching use cases:
-1. Pass the parser a string receive and receive an object
+1. Pass the parser a string and receive an object
 to work with instead of building custom parsing in JS.
 2. Extend what the parser understands for fully polyfilling
 
