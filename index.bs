@@ -5,8 +5,8 @@ Level: 1
 Status: UD
 Group: HOUDINI
 URL: https://drafts.css-houdini.org/css-parser-api/
-Editor: Tab Atkins-Bittner
-Editor: Greg Whitworth
+Editor: Tab Atkins-Bittner, Google
+Editor: Greg Whitworth, Salesforce
 Abstract: An API exposing the CSS parser more directly,
 Abstract: for parsing arbitrary CSS-like languages into a mildly typed representation.
 Repository: WICG/CSS-Parser-API
